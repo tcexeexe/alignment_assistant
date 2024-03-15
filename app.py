@@ -25,6 +25,7 @@ def decrypt_message(encrypted_message, key):
     return decrypted_message
 
 def call_api(question, answer):
+    print("call_api")
     # 假设的API URL
     url = os.getenv('url')
     # API调用的数据和头部，根据你的API调整
@@ -39,6 +40,7 @@ def call_api(question, answer):
     }
     # 发送POST请求到API
     response = requests.post(url, json=data, headers=headers)
+    print(response)
     # 假设API返回的是JSON，并且结果在'result'键中
     return json.loads(response.text)["message"]["score"]
 
