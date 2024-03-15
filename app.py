@@ -52,9 +52,10 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入回答...")
     ],
     outputs="text",  # 输出类型为文本
-    title="rlhf小助手演示示例",
+    title="rlhf小助手演示示例v1747",
     description="在两个输入框中分别输入问题和回答，点击提交查看回答评分结果。"
 )
 
 # 启动界面
 iface.launch()
+print("测试")
