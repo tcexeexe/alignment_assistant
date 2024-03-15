@@ -25,25 +25,23 @@ def decrypt_message(encrypted_message, key):
     return decrypted_message
 
 def call_api(question, answer):
-    return 123
-#     print("call_api")
-#     # 假设的API URL
-#     url = os.getenv('url')
-#     # API调用的数据和头部，根据你的API调整
-#     data = {
-#     "model":"rlhf",
-#     "messages":[{"role": "user", "question":  encrypt_message(question , DECODE_KEY).decode('utf-8'), "answer":encrypt_message(answer , DECODE_KEY).decode('utf-8')}],
-#     "stop":[] # 在此处添加自定义的stop words 例如ReAct prompting时需要增加： stop=["Observation:"]。
-# }
-#     headers = {
-#         "Content-Type": "application/json",
-#         "Authorization": f"Bearer {LOGIN_KEY}"  # 如果API需要认证
-#     }
-#     # 发送POST请求到API
-#     response = requests.post(url, json=data, headers=headers)
-#     print(response)
-#     # 假设API返回的是JSON，并且结果在'result'键中
-    # return json.loads(response.text)["message"]["score"]
+    # 假设的API URL
+    url = os.getenv('url')
+    # API调用的数据和头部，根据你的API调整
+    data = {
+    "model":"rlhf",
+    "messages":[{"role": "user", "question":  encrypt_message(question , DECODE_KEY).decode('utf-8'), "answer":encrypt_message(answer , DECODE_KEY).decode('utf-8')}],
+    "stop":[] # 在此处添加自定义的stop words 例如ReAct prompting时需要增加： stop=["Observation:"]。
+}
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {LOGIN_KEY}"  # 如果API需要认证
+    }
+    # 发送POST请求到API
+    response = requests.post(url, json=data, headers=headers)
+    print(response)
+    # 假设API返回的是JSON，并且结果在'result'键中
+    return json.loads(response.text)["message"]["score"]
 
 # 创建Gradio界面
 iface = gr.Interface(
@@ -53,7 +51,7 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入回答...")
     ],
     outputs="text",  # 输出类型为文本
-    title="rlhf小助手演示示例v1747",
+    title="rlhf小助手演示示例v1.0.0",
     description="在两个输入框中分别输入问题和回答，点击提交查看回答评分结果。"
 )
 
