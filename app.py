@@ -51,7 +51,7 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入回答...")
     ],
     outputs="text",  # 输出类型为文本
-    title="rlhf打分小助手演示示例v1.0.0",
+    title="大模型对齐小助手",
     description='''
     代替RLHF阶段的奖励模型，对LLM的输出进行打分。
     可以在两个输入框中分别输入问题和回答，点击提交查看回答评分结果。
