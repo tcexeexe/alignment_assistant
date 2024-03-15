@@ -6,7 +6,8 @@ API接口调用格式：
 - Content-Type: application/json
 - Authorization: Bearer {token}
 
-请求体（Body）：JSON格式，包含以下字段：
+请求体（Body）：  
+JSON格式，包含以下字段：  
 model: 字符串，指定使用的模型名称，这里是"RLHF"。
 messages: 一个包含字典的列表，每个字典代表一条消息，包含以下字段：  
     role: 字符串，指定消息的角色，这里是"user"。  
