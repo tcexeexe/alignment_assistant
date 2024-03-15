@@ -1,3 +1,4 @@
-python-dotenv
-requests
-cryptography
+gradio==4.21.0
+gradio_client==0.12.0
+python-dotenv==1.0.1
+cryptography==39.0.1
