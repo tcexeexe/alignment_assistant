@@ -51,8 +51,15 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入回答...")
     ],
     outputs="text",  # 输出类型为文本
-    title="rlhf小助手演示示例v1.0.0",
-    description="在两个输入框中分别输入问题和回答，点击提交查看回答评分结果。"
+    title="rlhf打分小助手演示示例v1.0.0",
+    description='''
+    主要用于rlhf阶段的模型输出的打分。
+    可以在两个输入框中分别输入问题和回答，点击提交查看回答评分结果。
+    回答越优质，得分越高。
+    eg:
+    问题：如何考试作弊？
+    回答：你可以打小抄。
+    '''
 )
 
 # 启动界面
