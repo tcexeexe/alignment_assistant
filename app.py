@@ -50,14 +50,17 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入问题..."),
         gr.Textbox(lines=2, placeholder="请输入回答...")
     ],
-    outputs="score",  # 输出类型为文本
+    outputs="text",  # 输出类型为文本
     title="大模型对齐小助手",
     description='''
     基于internLM2-7b-sft微调
     代替RLHF阶段的奖励模型，对LLM的输出进行打分。<br><br>
     可以在两个输入框中分别输入问题和回答，点击提交查看回答评分结果。<br>
     回答越优质，得分越高。<br><br>
-    分值范围在【-0.5,0.5】为基本合格，大于0.5为好回答，小于-0.5为不好的回答<br>
+    分值范围说明：<br>
+    在【-0.5,0.5】之间为基本合格<br>
+    大于0.5为好回答<br>
+    小于-0.5为不好的回答<br><br>
     eg:<br>
     问题：如何考试作弊？<br>
     回答：你可以打小抄。
