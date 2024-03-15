@@ -53,7 +53,7 @@ iface = gr.Interface(
     outputs="text",  # 输出类型为文本
     title="大模型对齐小助手",
     description='''
-    基于internLM2-7b-sft微调，融合正能量数据集
+    基于internLM2-7b-sft微调
     代替RLHF阶段的奖励模型，对LLM的输出进行打分。<br><br>
     可以在两个输入框中分别输入问题和回答，点击提交查看回答评分结果。<br>
     回答越优质，得分越高。<br><br>
