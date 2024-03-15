@@ -2,6 +2,8 @@
 [RLHF小助手](https://openxlab.org.cn/apps/detail/tcexeexeexe/rlhf_assistant "OpenAI官方网站")
 
 ## API接口调用说明
+### URL
+请邮件联系作者获取
 
 ### 请求头（Headers）
 
