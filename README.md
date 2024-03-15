@@ -1,3 +1,6 @@
+## demo示例
+[RLHF小助手](https://openxlab.org.cn/apps/detail/tcexeexeexe/rlhf_assistant "OpenAI官方网站")
+
 ## API接口调用说明
 
 ### 请求头（Headers）
