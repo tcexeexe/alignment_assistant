@@ -41,7 +41,7 @@ def call_api(question, answer):
     response = requests.post(url, json=data, headers=headers)
     print(response)
     # 假设API返回的是JSON，并且结果在'result'键中
-    return json.loads(response.text)["message"]["score"]
+    return json.loads(response.text)["message"]
 
 # 创建Gradio界面
 iface = gr.Interface(
@@ -53,6 +53,7 @@ iface = gr.Interface(
     outputs="text",  # 输出类型为文本
     title="大模型对齐小助手",
     description='''
+    更新记录：240318 更新模型权重分布，增加推荐性回答
     基于internLM2-7b-sft微调
     代替RLHF阶段的奖励模型，对LLM的输出进行打分。<br><br>
     可以在两个输入框中分别输入问题和回答，点击提交查看回答评分结果。<br>
