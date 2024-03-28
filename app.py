@@ -74,13 +74,10 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案"),
     ],
     outputs="text",  # 输出类型为文本
-    title="BigAlign大模型对齐小助手",
+    title="BigAlign审核大模型",
     description= """
-    **更新记录：**
-    240318 更新模型权重分布，增加推荐性回答
-
     **说明：**
-    基于internLM2-7b-sft微调，代替RLHF阶段的奖励模型，对LLM的输出进行打分,如果得分小于0，则给出推荐性回答。
+    对LLM的输出进行打分,如果得分小于0，则给出推荐性回答。
     
     **使用方法：**
     在两个输入框中分别输入问题和答案，点击提交，等待4秒左右，查看回答评分结果，回答越优质，得分越高。
