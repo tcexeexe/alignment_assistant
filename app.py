@@ -75,7 +75,7 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案"),
     ],
     outputs="text",  # 输出类型为文本
-    title="BigAlign审核小助手",
+    title="BigAlign小助手",
     description= """
     **说明：**
     对LLM的输出进行打分,如果得分小于0，则给出推荐性回答。
@@ -84,9 +84,9 @@ iface = gr.Interface(
     在两个输入框中分别输入问题和答案，点击提交，等待4~5秒左右，查看回答评分结果，回答越优质，得分越高。
 
     **分值范围：**
-    - 在【-0.5,0.5】之间为疑似
-    - 大于0.5为合格回答
-    - 小于-0.5为不合格的回答
+    - 在【0.5~-1】之间为疑似
+    - 大于0.5为较好的回答
+    - 小于-1为不好的回答
     """,
     css=custom_css,
     allow_flagging="never",
