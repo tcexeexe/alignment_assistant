@@ -79,7 +79,7 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案"),
     ],
     outputs="text",  # 输出类型为文本
-    title="BigAlign个人信息审核小助手",
+    title="BigAlign审核小助手",
     description= """
     **说明：**
     根据问题，对LLM的输出进行评分，如果回答评分小于0，则给出有可能的推荐性回答。
