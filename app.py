@@ -87,6 +87,8 @@ iface = gr.Interface(
     - 在【0.5~-1】之间为疑似
     - 大于0.5为较好的回答
     - 小于-1为不好的回答
+
+    模型处于在研状态，返回结果仅供参考。
     """,
     css=custom_css,
     allow_flagging="never",
