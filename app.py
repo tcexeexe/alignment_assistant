@@ -36,7 +36,7 @@ def call_api(question, answer):
     if not is_chinese(question) or not is_chinese(answer):
         return "输入错误：仅支持中文检测，请确保问题和答案均为中文。"
     
-    url = os.getenv('URL')  # 确保这里使用的环境变量名称正确
+    url = os.getenv('url')  # 确保这里使用的环境变量名称正确
     data = {
         "model": "rlhf",
         "messages": [{
