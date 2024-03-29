@@ -36,7 +36,7 @@ def call_api(question, answer):
     if not is_chinese(question) or not is_chinese(answer):
         return "输入错误：仅支持中文检测，请确保问题和答案均为中文。"
     
-    url = os.getenv('url')
+    url = os.getenv('URL')  # 确保这里使用的环境变量名称正确
     data = {
         "model": "rlhf",
         "messages": [{
@@ -50,10 +50,15 @@ def call_api(question, answer):
         "Content-Type": "application/json",
         "Authorization": f"Bearer {LOGIN_KEY}"
     }
-    response = requests.post(url, json=data, headers=headers)
-    print(response)
-    # 假设API返回的是JSON，并且结果在"message"键中
-    return json.loads(response.text).get("message", "API调用失败或返回格式不正确，可能在后台更新中，稍安勿躁")
+    try:
+        response = requests.post(url, json=data, headers=headers)
+        if response.status_code == 429:
+            return "试用的人太多了，请稍后再试。"
+        # 假设API返回的是JSON，并且结果在"message"键中
+        return json.loads(response.text).get("message", "API调用失败或返回格式不正确，可能在后台更新中，稍安勿躁")
+    except requests.exceptions.RequestException as e:
+        return f"请求错误: {str(e)}"
+
 
 
 custom_css = '''
