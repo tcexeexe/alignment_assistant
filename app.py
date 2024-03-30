@@ -68,7 +68,7 @@ iface = gr.Interface(
     inputs=[
         gr.Textbox(lines=2, placeholder="请输入问题...", label="问题"),
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案"),
-        gr.HTML("<div style='text-align: center;'><img src='https://userblink.csdnimg.cn/direct/fe4badd89ae74e8d80598f4b8fae6d2e.jpeg' alt='如遇有私有化部署需求或技术问题请扫描添加技术支持微信' style='max-width: 100%; height: auto;'></div>")  # 插入图片的HTML
+        gr.HTML("<div style='text-align: center;'><img src='https://userblink.csdnimg.cn/direct/fe4badd89ae74e8d80598f4b8fae6d2e.jpeg' alt='如遇有私有化部署需求或技术问题请扫描添加技术支持微信' style='max-width: 20%; height: auto;'></div>")  # 插入图片的HTML
     ],
     outputs="text",
     title="BigAlign审核小助手",
