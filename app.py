@@ -60,6 +60,10 @@ custom_css = '''
     p { margin-bottom: 5px; }
 '''
 
+# 图片组件，放在最下方
+image_html = gr.HTML("<div style='text-align: center;'><img src='你的图片路径' alt='图片描述' style='max-width: 30%; height: auto; margin-top: 20px;'></div>")
+
+
 # 创建Gradio界面
 iface = gr.Interface(
     fn=call_api,
@@ -68,7 +72,6 @@ iface = gr.Interface(
     inputs=[
         gr.Textbox(lines=2, placeholder="请输入问题...", label="问题"),
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案"),
-        gr.HTML("<div style='text-align: center;'><img src='https://userblink.csdnimg.cn/direct/fe4badd89ae74e8d80598f4b8fae6d2e.jpeg' alt='如遇有私有化部署需求或技术问题请扫描添加技术支持微信' style='max-width: 20%; height: auto;'></div>")  # 插入图片的HTML
     ],
     outputs="text",
     title="BigAlign审核小助手",
@@ -84,7 +87,8 @@ iface = gr.Interface(
     css=custom_css,
     allow_flagging="never",
     submit_btn="提交",
-    clear_btn="清除"
+    clear_btn="清除",
+    elements=[image_html]  # 将图片组件放在页面最下方
 )
 
 # 启动界面
