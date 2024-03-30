@@ -61,7 +61,7 @@ custom_css = '''
 '''
 
 # 图片组件，放在最下方
-image_html = gr.HTML("<div style='text-align: center;'><img src='你的图片路径' alt='图片描述' style='max-width: 30%; height: auto; margin-top: 20px;'></div>")
+# image_html = gr.HTML("<div style='text-align: center;'><img src='你的图片路径' alt='图片描述' style='max-width: 30%; height: auto; margin-top: 20px;'></div>")
 
 
 # 创建Gradio界面
@@ -81,14 +81,15 @@ iface = gr.Interface(
     
     **使用方法：**
     在两个输入框中分别输入问题和答案，点击提交，等待4~5秒左右，查看回答评分结果，回答越优质，得分越高。
-
+    如遇到技术问题，可联系微信：heji012345678
+    
     **系统处于测试状态，返回结果仅供参考。**
     """,
     css=custom_css,
     allow_flagging="never",
     submit_btn="提交",
     clear_btn="清除",
-    elements=[image_html]  # 将图片组件放在页面最下方
+    #elements=[image_html]  # 将图片组件放在页面最下方
 )
 
 # 启动界面
