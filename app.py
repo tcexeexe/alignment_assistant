@@ -50,11 +50,12 @@ def call_api(question, answer):
             return "试用的人太多了，请稍后再试。"
         
         response_data = json.loads(response.text)
-        score = response_data.get("score", 0)  # 假设API返回中含有评分字段'score'
-        
-        if float(score['score']) < -1:
+        print(response_data)
+        score = response_data.get("message")  # 假设API返回中含有评分字段'score'
+        print(score)
+        if float(score.get("score")) < -1:
             return "不合规"
-        elif float(score['score']) > 1:
+        elif float(score.get("score")) > 1:
             return "合规"
         else:
             return "疑似"
