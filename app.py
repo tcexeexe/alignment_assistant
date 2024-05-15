@@ -48,9 +48,20 @@ def call_api(question, answer):
         response = requests.post(url, json=data, headers=headers)
         if response.status_code == 429:
             return "试用的人太多了，请稍后再试。"
-        return json.loads(response.text).get("message", "API调用失败或返回格式不正确，可能在后台更新中，稍安勿躁")
+        
+        response_data = json.loads(response.text)
+        score = response_data.get("score", 0)  # 假设API返回中含有评分字段'score'
+        
+        if score < -1:
+            return "不合规"
+        elif score > 1:
+            return "合规"
+        else:
+            return "疑似"
+
     except requests.exceptions.RequestException as e:
         return f"请求错误: {str(e)}"
+
 
 custom_css = '''
     body { font-family: Arial; }
@@ -77,7 +88,7 @@ iface = gr.Interface(
     title="“对齐能手”问答审核模型",
     description= """
     **说明：**
-    根据问题，对LLM的输出进行评分，如果回答评分小于-1，则回答不合规。
+    根据问题，对LLM的输出进行审核，输出合规、不合规、疑似。
     
     **使用方法：**
     在两个输入框中分别输入问题和答案，点击提交，等待1秒左右，查看回答评分结果，回答越优质，得分越高。
