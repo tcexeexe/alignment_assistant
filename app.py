@@ -52,9 +52,9 @@ def call_api(question, answer):
         response_data = json.loads(response.text)
         score = response_data.get("score", 0)  # 假设API返回中含有评分字段'score'
         
-        if score < -1:
+        if float(score['score']) < -1:
             return "不合规"
-        elif score > 1:
+        elif float(score['score']) > 1:
             return "合规"
         else:
             return "疑似"
