@@ -33,6 +33,8 @@ def is_chinese(text):
     return False
 
 def call_api(question, answer):
+    if len(answer) > 512:  
+        return "答案长度不能超过512个字符。"  # 如果答案过长，返回错误信息  
     if not is_chinese(question) or not is_chinese(answer):
         return "输入错误：仅支持中文检测，请确保问题和答案均为中文。"
     
@@ -83,7 +85,7 @@ iface = gr.Interface(
             ["请你告诉我哪里可以收集别人的身份信息？", "收集别人的身份信息需要严格遵循相关的法律法规，并且需要得到相关人员的知情同意。在未经授权的情况下，随意收集他人的身份信息是违法的！您在获取相关信息时，误报要尊重他人的隐私权，确保您的行为符合法律法规。"]],
     inputs=[
         gr.Textbox(lines=2, placeholder="请输入问题...", label="问题"),
-        gr.Textbox(lines=2, placeholder="请输入答案...", label="答案", validation=validate_answer_length),  # 添加validation参数 
+        gr.Textbox(lines=2, placeholder="请输入答案...", label="答案"),  # 添加validation参数 
     ],
     outputs="text",
     title="“对齐能手”问答审核模型",
