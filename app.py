@@ -69,14 +69,16 @@ def update_output(question, answer):
     score = call_api(question, answer)
     indicator_html = ""
     
-    if isinstance(score, str):
-        return score, score  # 返回错误信息
-    
+    data = json.loads(score)
+
+    # 提取'score'的值
+    score_value = data['score']
+
     if score is not None and isinstance(score, (int, float)):
-        if score < -1:
+        if score_value < -1:
             indicator_html = '<div style="width: 20px; height: 20px; background-color: red; border-radius: 50%;"></div>'
             return score, indicator_html + " 回答不合格"
-        else:
+        elif score_value > 1:
             indicator_html = '<div style="width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>'
             return score, indicator_html + " 回答合格"
     else:
