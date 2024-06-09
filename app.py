@@ -82,7 +82,7 @@ def update_output(question, answer):
             indicator_html = '<div style="width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>'
             return score, indicator_html + " 回答合格"
     else:
-        return "未知错误", "score"
+        return "未知错误", score
 
 custom_css = '''
     body { font-family: Arial, sans-serif; background-color: #f7f7f7; color: #333; }
