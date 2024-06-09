@@ -67,6 +67,7 @@ def call_api(question, answer):
 
 def update_output(question, answer):
     score = call_api(question, answer)
+    return score
     indicator_html = ""
     
     data = json.dumps(score)
