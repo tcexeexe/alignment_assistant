@@ -69,7 +69,7 @@ def update_output(question, answer):
     score = call_api(question, answer)
     indicator_html = ""
     
-    data = json.loads(score)
+    data = score
 
     # 提取'score'的值
     score_value = data['score']
