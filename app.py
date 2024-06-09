@@ -59,7 +59,7 @@ def call_api(question, answer):
         
         response_data = json.loads(response.text)
         print(response_data)
-        score = response_data.get("message")  # 假设API返回中含有评分字段'score'
+        score = response_data.get("score")  # 获取score字段
         return score
 
     except requests.exceptions.RequestException as e:
@@ -67,23 +67,21 @@ def call_api(question, answer):
 
 def update_output(question, answer):
     score = call_api(question, answer)
-    return score
     indicator_html = ""
     
-    data = json.dumps(score)
-
-    # 提取'score'的值
-    score_value = data['score']
-
-    if score is not None and isinstance(score, (int, float)):
-        if score_value < -1:
+    if isinstance(score, str) and score.startswith("请求错误"):
+        return score, ""
+    
+    try:
+        score = float(score)
+        if score < -1:
             indicator_html = '<div style="width: 20px; height: 20px; background-color: red; border-radius: 50%;"></div>'
-            return score, indicator_html + " 回答不合格"
-        elif score_value > 1:
+            return str(score), indicator_html + " 回答不合格"
+        else:
             indicator_html = '<div style="width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>'
-            return score, indicator_html + " 回答合格"
-    else:
-        return "未知错误", score
+            return str(score), indicator_html + " 回答合格"
+    except (TypeError, ValueError):
+        return "未知错误", ""
 
 custom_css = '''
     body { font-family: Arial, sans-serif; background-color: #f7f7f7; color: #333; }
