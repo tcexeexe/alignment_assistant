@@ -87,8 +87,8 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入问题...", label="问题"),
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案"),  # 添加validation参数 
     ],
-    outputs="text",
-    output_label="评分",
+    # outputs="text",
+    outputs=gr.Textbox(label="评分"), 
     title="“对齐能手”问答审核模型",
     description= """
     **说明：**
