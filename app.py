@@ -105,6 +105,7 @@ iface = gr.Interface(
     allow_flagging="never",
     submit_btn="提交",
     clear_btn="清除",
+    examples_label="测试示例",
     #elements=[image_html]  # 将图片组件放在页面最下方
 )
 
