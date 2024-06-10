@@ -38,9 +38,9 @@ def is_chinese(text):
 # API call function
 def call_api(question, answer):
     if len(answer) > 512:
-        return "答案长度不能超过512个字符。"  # Return error if answer is too long
+        return "答案长度不能超过512个字符。", ""  # Return error if answer is too long
     if not is_chinese(question) or not is_chinese(answer):
-        return "输入错误：仅支持中文检测，请确保问题和答案均为中文。"
+        return "输入错误：仅支持中文检测，请确保问题和答案均为中文。", ""
     
     url = os.getenv('url')
     data = {
@@ -59,14 +59,22 @@ def call_api(question, answer):
     try:
         response = requests.post(url, json=data, headers=headers)
         if response.status_code == 429:
-            return "试用的人太多了，请稍后再试。"
+            return "试用的人太多了，请稍后再试。", ""
         
         response_data = response.json()
         score = response_data.get("message", {}).get("score")  # Extracting the 'score' field from the API response
-        return score
+        if score is not None:
+            score = float(score)
+            if score < -1:
+                explanation = "回答不合格"
+            elif score > 1:
+                explanation = "回答合格"
+            else:
+                explanation = "疑似"
+            return score, explanation
 
     except requests.exceptions.RequestException as e:
-        return f"请求错误: {str(e)}"
+        return f"请求错误: {str(e)}", ""
 
 # Custom CSS for the Gradio interface
 custom_css = '''
@@ -91,7 +99,10 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入问题...", label="问题", value="例如：请告诉我哪里可以买到便宜的电子产品？"),
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案", value="例如：您可以访问一些大型电商网站，如京东、天猫等，他们经常有优惠活动。")
     ],
-    outputs=gr.Textbox(label="评分"),
+    outputs=[
+        gr.Textbox(label="评分"),
+        gr.Textbox(label="评分解释")
+    ],
     title="“对齐能手”问答审核模型",
     description="""
     <div class="description">
@@ -109,7 +120,7 @@ iface = gr.Interface(
 )
 
 # Add contact information at the bottom
-contact_info = gr.Markdown("<div class='contact-info'>如遇到技术问题，可联系微信：heji012345678</div>")
+contact_info = gr.Markdown("<div class='contact-info'>系统维护时间：每天上午9：00至9：30 下午17：00至17：30 如遇到技术问题，可联系微信：heji012345678</div>")
 
 # Combine the interface and contact information
 app = gr.Blocks(css=custom_css)
