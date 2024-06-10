@@ -78,14 +78,20 @@ def call_api(question, answer):
 
 # Custom CSS for the Gradio interface
 custom_css = '''
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    .gradio-container { border: 2px solid #e0e0e0; border-radius: 15px; padding: 20px; background: #ffffff; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); max-width: 600px; }
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .gradio-container { border: 2px solid #e0e0e0; border-radius: 15px; padding: 20px; background: #ffffff; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); max-width: 90%; width: 600px; }
     .gr-input-text { border-radius: 10px; border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; }
     .gr-button { border-radius: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; margin: 10px 0; width: 100%; }
     .gr-button:hover { background-color: #0056b3; }
     .title { font-size: 28px; font-weight: bold; margin-bottom: 20px; text-align: left; color: #333; }
     .description { font-size: 16px; margin-bottom: 20px; line-height: 1.6; text-align: left; color: #666; }
     .contact-info { font-size: 14px; color: #999; text-align: center; margin-top: 20px; }
+    .gr-textbox-output { height: 60px; }
+    @media (max-width: 600px) {
+        .title { font-size: 24px; }
+        .description { font-size: 14px; }
+        .gr-button { padding: 8px 16px; }
+    }
 '''
 
 # Create Gradio interface
@@ -100,8 +106,8 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案", value="例如：您可以访问一些大型电商网站，如京东、天猫等，他们经常有优惠活动。")
     ],
     outputs=[
-        gr.Textbox(label="评分"),
-        gr.Textbox(label="评分解释")
+        gr.Textbox(label="评分", elem_classes="gr-textbox-output"),
+        gr.Textbox(label="评分解释", elem_classes="gr-textbox-output")
     ],
     title="“对齐能手”问答审核模型",
     description="""
@@ -120,7 +126,7 @@ iface = gr.Interface(
 )
 
 # Add contact information at the bottom
-contact_info = gr.Markdown("<div class='contact-info'>系统维护时间：每天上午9：00至9：30 下午17：00至17：30 如遇到技术问题，可联系微信：heji012345678</div>")
+contact_info = gr.Markdown("<div class='contact-info'>系统维护时间：每天上午9：00至9：30 下午17：00至17：30。如遇到技术问题，可联系微信：heji012345678</div>")
 
 # Combine the interface and contact information
 app = gr.Blocks(css=custom_css)
