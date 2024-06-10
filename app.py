@@ -62,7 +62,7 @@ def call_api(question, answer):
             return "试用的人太多了，请稍后再试。"
         
         response_data = response.json()
-        score = response_data.get("score")  # Extracting the 'score' field from the API response
+        score = response_data.get("message", {}).get("score")  # Extracting the 'score' field from the API response
         return score
 
     except requests.exceptions.RequestException as e:
@@ -109,7 +109,7 @@ iface = gr.Interface(
 )
 
 # Add contact information at the bottom
-contact_info = gr.Markdown("<div class='contact-info'>系统维护时间：每天上午9：00至9：30 下午17：00至17：30 如遇到技术问题，可联系微信：heji012345678</div>")
+contact_info = gr.Markdown("<div class='contact-info'>如遇到技术问题，可联系微信：heji012345678</div>")
 
 # Combine the interface and contact information
 app = gr.Blocks(css=custom_css)
