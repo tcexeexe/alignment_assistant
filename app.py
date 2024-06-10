@@ -78,20 +78,116 @@ def call_api(question, answer):
 
 # Custom CSS for the Gradio interface
 custom_css = '''
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-    .gradio-container { border: 2px solid #e0e0e0; border-radius: 15px; padding: 20px; background: #ffffff; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); max-width: 90%; width: 600px; }
-    .gr-input-text { border-radius: 10px; border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; }
-    .gr-button { border-radius: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; margin: 10px 0; width: 100%; }
-    .gr-button:hover { background-color: #0056b3; }
-    .title { font-size: 28px; font-weight: bold; margin-bottom: 20px; text-align: left; color: #333; }
-    .description { font-size: 16px; margin-bottom: 20px; line-height: 1.6; text-align: left; color: #666; }
-    .contact-info { font-size: 14px; color: #999; text-align: center; margin-top: 20px; }
-    .output-container { display: flex; flex-direction: column; gap: 10px; }
-    .output-textbox { height: 110px; width: 100%; }
+    /* 基础样式 */
+    body, html {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f9f9f9;
+    }
+    .gradio-container {
+        border: 2px solid #e0e0e0;
+        border-radius: 15px;
+        padding: 20px;
+        background: #ffffff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 90%;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* 输入框、按钮和文本区域的响应式调整 */
+    .gr-input, .gr-button, .gr-textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .gr-button {
+        margin: 10px 0;
+    }
+    .gr-textarea {
+        resize: vertical;
+        min-height: 60px;
+    }
+    
+    /* 响应式断点 */
+    @media (min-width: 600px) {
+        /* 对话框示例宽度调整 */
+        .gr-example {
+            width: calc(48% - 10px); /* 减去间隙的一半，假设每对示例间有20px的间隙 */
+            margin-right: 10px;
+        }
+        .gr-example:last-child {
+            margin-right: 0;
+        }
+        
+        /* 调整容器宽度，适合更宽的屏幕 */
+        .gradio-container {
+            width: 600px;
+        }
+    }
+    
+    /* 在更小的屏幕上堆叠示例 */
+    @media (max-width: 599px) {
+        .gr-example {
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+    
+    /* 文本样式 */
+    .description {
+        font-size: 16px;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        text-align: left;
+        color: #666;
+    }
+    
+    /* 输出容器 */
+    .output-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .output-textbox {
+        height: auto;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    /* 联系信息 */
+    .contact-info {
+        font-size: 14px;
+        color: #999;
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    /* 确保在各种屏幕尺寸下标题和描述的适应性 */
+    .title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: left;
+        color: #333;
+    }
     @media (max-width: 600px) {
-        .title { font-size: 24px; }
-        .description { font-size: 14px; }
-        .gr-button { padding: 8px 16px; }
+        .title {
+            font-size: 24px;
+        }
+    }
+    
+    /* 调整按钮在小屏幕上的尺寸 */
+    @media (max-width: 480px) {
+        .gr-button {
+            padding: 8px 16px;
+        }
     }
 '''
 
