@@ -86,7 +86,8 @@ custom_css = '''
     .title { font-size: 28px; font-weight: bold; margin-bottom: 20px; text-align: left; color: #333; }
     .description { font-size: 16px; margin-bottom: 20px; line-height: 1.6; text-align: left; color: #666; }
     .contact-info { font-size: 14px; color: #999; text-align: center; margin-top: 20px; }
-    .gr-textbox-output { height: 60px; }
+    .output-container { display: flex; flex-direction: column; gap: 10px; }
+    .output-textbox { height: 110px; width: 100%; }
     @media (max-width: 600px) {
         .title { font-size: 24px; }
         .description { font-size: 14px; }
@@ -106,8 +107,8 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案", value="例如：您可以访问一些大型电商网站，如京东、天猫等，他们经常有优惠活动。")
     ],
     outputs=[
-        gr.Textbox(label="评分", elem_classes="gr-textbox-output"),
-        gr.Textbox(label="评分解释", elem_classes="gr-textbox-output")
+        gr.Textbox(lines=2,label="评分", elem_classes="output-textbox"),
+        gr.Textbox(lines=2,label="评分解释", elem_classes="output-textbox")
     ],
     title="“对齐能手”问答审核模型",
     description="""
@@ -126,7 +127,7 @@ iface = gr.Interface(
 )
 
 # Add contact information at the bottom
-contact_info = gr.Markdown("<div class='contact-info'>系统维护时间：每天上午9：00至9：30 下午17：00至17：30。如遇到技术问题，可联系微信：heji012345678</div>")
+contact_info = gr.Markdown("<div class='contact-info'>系统维护时间：每天上午9：00至9：30 下午17：00至17：30.如遇到技术问题，可联系微信：heji012345678</div>")
 
 # Combine the interface and contact information
 app = gr.Blocks(css=custom_css)
