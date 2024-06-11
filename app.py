@@ -83,10 +83,6 @@ custom_css = '''
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
         background-color: #f9f9f9;
     }
     .gradio-container {
@@ -132,11 +128,15 @@ custom_css = '''
         }
     }
     
-    /* 在更小的屏幕上堆叠示例 */
-    @media (max-width: 599px) {
-        .gr-example {
-            width: 100%;
-            margin-right: 0;
+    /* 添加Viewport Meta标签到HTML头部 */
+    @media screen and (max-width: 480px) {
+        .gr-input {
+            width: 90%;
+            margin-bottom: 20px;
+        }
+        .gr-button {
+            width: 90%;
+            padding: 10px;
         }
     }
     
@@ -149,22 +149,20 @@ custom_css = '''
         color: #666;
     }
     
-    /* 新增或修改这部分来移除评分和评分解释的灰色边框 */
+    /* 移除评分和评分解释的灰色边框 */
     .output-textbox {
-        height: auto; /* 保持原有的高度自适应内容 */
+        height: auto;
         width: 100%;
         margin-bottom: 15px;
-        border: none; /* 移除边框 */
-        box-shadow: none; /* 如果有阴影也一并移除 */
+        border: none;
+        box-shadow: none;
     }
-
-    /* 如果灰色边框是由外层容器引起的，确保容器也没有边框 */
     .output-container {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        border: none; /* 确保容器无边框 */
-        box-shadow: none; /* 容器如果有阴影也一并移除 */
+        border: none;
+        box-shadow: none;
     }
     
     /* 联系信息 */
@@ -175,7 +173,7 @@ custom_css = '''
         margin-top: 20px;
     }
     
-    /* 确保在各种屏幕尺寸下标题和描述的适应性 */
+    /* 标题和描述的适应性 */
     .title {
         font-size: 28px;
         font-weight: bold;
@@ -197,14 +195,14 @@ custom_css = '''
     }
 
     .no-border-input {
-    background-color: transparent; /* 将背景色设为透明 */
-    border: none; /* 移除边框 */
-    outline: none; /* 移除轮廓线 */
-    padding: 8px 12px; /* 添加内边距以适应文字 */
-    font-size: 16px; /* 调整字体大小，可按需更改 */
-    color: #333; /* 调整字体颜色，可按需更改 */
-    box-sizing: border-box; /* 让padding和border计算在元素宽度之内 */
-}
+        background-color: transparent;
+        border: none;
+        outline: none;
+        padding: 8px 12px;
+        font-size: 16px;
+        color: #333;
+        box-sizing: border-box;
+    }
 '''
 
 # Create Gradio interface
@@ -219,18 +217,18 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入答案...", label="答案", value="例如：好的，312428123728375432。")
     ],
     outputs=[
-        gr.Textbox(label="评分", elem_classes="no-border-input"),
-        gr.Textbox(label="评分解释", elem_classes="no-border-input")
+        gr.Textbox(label="评分"),# , elem_classes="no-border-input"
+        gr.Textbox(label="评分解释") # , elem_classes="no-border-input"
     ],
     title="“对齐能手”问答审核模型",
     description="""
-    <div class="description">
-        <p><strong>说明：</strong></p>
-        <p>根据问题，对LLM的输出进行审核，输出得分，得分小于0为回答不合格。</p>
-        <p><strong>使用方法：</strong></p>
-        <p>在两个输入框中分别输入问题和答案，点击提交，等待1秒左右，查看回答评分结果，回答越优质，得分越高。</p>
-        <p><strong>系统处于测试状态，返回结果仅供参考。</strong></p>
-    </div>
+     <div class="description">
+         <p><strong>说明：</strong></p>
+         <p>根据问题，对LLM的输出进行审核，输出得分，得分小于0为回答不合格。</p>
+         <p><strong>使用方法：</strong></p>
+         <p>在两个输入框中分别输入问题和答案，点击提交，等待1秒左右，查看回答评分结果，回答越优质，得分越高。</p>
+         <p><strong>系统处于测试状态，返回结果仅供参考。</strong></p>
+     </div>
     """,
     css=custom_css,
     allow_flagging="never",
@@ -239,10 +237,14 @@ iface = gr.Interface(
 )
 
 # Add contact information at the bottom
-contact_info = gr.Markdown("<div class='contact-info'>系统维护时间：每天上午9：00至9：30 下午17：00至17：30.如遇到技术问题，可联系微信：heji012345678</div>")
+contact_info = gr.Markdown(
+    "<div class='contact-info' style='text-align:center;'>\
+        系统维护时间：每天上午9：00至9：30 下午17：00至17：30.如遇到技术问题，可联系微信：heji012345678\
+    </div>"
+)
 
-# Combine the interface and contact information
-app = gr.Blocks(css=custom_css)
+# # Combine the interface and contact information
+app = gr.Blocks(css=custom_css) # 
 with app:
     iface.render()
     contact_info.render()
