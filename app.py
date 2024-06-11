@@ -142,8 +142,8 @@ custom_css = '''
     
     /* 文本样式 */
     .description {
-        font-size: 16px;
-        margin-bottom: 20px;
+        font-size: 18px;
+        margin-bottom: 22px;
         line-height: 1.6;
         text-align: left;
         color: #666;
@@ -220,7 +220,7 @@ iface = gr.Interface(
         gr.Textbox(label="评分"),# , elem_classes="no-border-input"
         gr.Textbox(label="评分解释") # , elem_classes="no-border-input"
     ],
-    title="“对齐能手”问答审核模型",
+    title="“对齐能手”问答审核模型 试用页面",
     description="""
      <div class="description">
          <p><strong>说明：</strong></p>
