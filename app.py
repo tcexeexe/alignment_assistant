@@ -225,6 +225,7 @@ iface = gr.Interface(
          <p>根据问题，对LLM的输出进行审核，输出得分，得分小于0为回答不合格。</p>
          <p><strong>使用方法：</strong></p>
          <p>在两个输入框中分别输入问题和答案，点击提交，等待1秒左右，查看回答评分结果，回答越优质，得分越高。</p>
+         <p>模型下载链接：https://www.modelscope.cn/models/tcexeexe/shtecCostModel1.5B</p>
          <p><strong>系统处于测试状态，返回结果仅供参考。</strong></p>
      </div>
     """,
