@@ -12,8 +12,8 @@ LOGIN_KEY = os.getenv('LOGIN_KEY')
 
 # Custom validation function
 def validate_answer_length(answer):
-    if len(answer) > 512:
-        return "答案长度不能超过512个字符。"
+    if len(answer) > 1024:
+        return "答案长度不能超过1024个字符。"
     return True  # Return True if validation passes
 
 # Encryption function
@@ -37,10 +37,8 @@ def is_chinese(text):
 
 # API call function
 def call_api(question, answer):
-    if len(answer) > 512:
-        return "答案长度不能超过512个字符。", ""  # Return error if answer is too long
-    if not is_chinese(question) or not is_chinese(answer):
-        return "输入错误：仅支持中文检测，请确保问题和答案均为中文。", ""
+    if len(answer) > 1024:
+        return "答案长度不能超过1024个字符。", ""  # Return error if answer is too long
     
     url = os.getenv('url')
     data = {
