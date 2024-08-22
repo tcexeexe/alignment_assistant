@@ -43,12 +43,12 @@ def call_api(question, answer, file1=None, file2=None):
     # Read and encrypt the file content if a file is uploaded
     file1_content = None
     file2_content = None
-    if file1 is not None:
-        with open(file1.name, 'rb') as f:
-            file1_content = f.read()
-    if file2 is not None:
-        with open(file2.name, 'rb') as f:
-            file2_content = f.read()
+    # if file1 is not None:
+    #     with open(file1.name, 'rb') as f:
+    #         file1_content = f.read()
+    # if file2 is not None:
+    #     with open(file2.name, 'rb') as f:
+    #         file2_content = f.read()
 
     url = os.getenv('url')
     data = {
