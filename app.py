@@ -261,7 +261,7 @@ with app:
 
     with gr.Row():
         file1_input = gr.File(label="自定义审核规则上传", elem_classes="custom-file-upload")
-        file2_input = gr.File(label="自定义敏感词列表上传", elem_classes="custom-file-upload")
+        file2_input = gr.File(label="自定义词表上传", elem_classes="custom-file-upload")
     
     score_output = gr.Textbox(label="评分")
     explanation_output = gr.Textbox(label="评分解释")
@@ -298,3 +298,4 @@ with app:
 
 # Launch the Gradio interface
 app.launch()
+
