@@ -260,8 +260,8 @@ with app:
     answer_input = gr.Textbox(lines=2, placeholder="请输入答案...", label="答案", value="例如：好的，312428123728375432。")
 
     with gr.Row():
-        file1_input = gr.File(label="自定义审核规则上传", elem_classes="custom-file-upload")
-        file2_input = gr.File(label="自定义词表上传", elem_classes="custom-file-upload")
+        file1_input = gr.File(label="自定义审核规则上传(可选)", elem_classes="custom-file-upload")
+        file2_input = gr.File(label="自定义词表上传(可选)", elem_classes="custom-file-upload")
     
     score_output = gr.Textbox(label="评分")
     explanation_output = gr.Textbox(label="评分解释")
@@ -298,4 +298,5 @@ with app:
 
 # Launch the Gradio interface
 app.launch()
+
 
