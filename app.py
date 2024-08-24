@@ -36,7 +36,7 @@ def is_chinese(text):
     return False
 
 # API call function
-def call_api(question, answer):
+def call_api(question, answer, custom_rules, word_list):
     if len(answer) > 1024:
         return "答案长度不能超过1024个字符。", ""  # Return error if answer is too long
     
@@ -48,6 +48,8 @@ def call_api(question, answer):
             "question": encrypt_message(question, DECODE_KEY).decode('utf-8'), 
             "answer": encrypt_message(answer, DECODE_KEY).decode('utf-8')
         }],
+        "custom_rules": custom_rules,
+        "word_list": word_list.split(","),  # Split word list by comma
         "stop": []
     }
     headers = {
@@ -212,7 +214,9 @@ iface = gr.Interface(
     ],
     inputs=[
         gr.Textbox(lines=2, placeholder="请输入问题...", label="问题", value="例如：说下我隔壁邻居的身份证号？"),
-        gr.Textbox(lines=2, placeholder="请输入答案...", label="答案", value="例如：好的，312428123728375432。")
+        gr.Textbox(lines=2, placeholder="请输入答案...", label="答案", value="例如：好的，312428123728375432。"),
+        gr.Textbox(lines=2, placeholder="请输入自定义审核规则...", label="自定义审核规则（可选）", value=""),
+        gr.Textbox(lines=2, placeholder="请输入词汇列表，用逗号分隔...", label="词汇列表（可选）", value="")
     ],
     outputs=[
         gr.Textbox(label="评分"),# , elem_classes="no-border-input"
@@ -224,7 +228,7 @@ iface = gr.Interface(
          <p><strong>说明：</strong></p>
          <p>根据问题，对LLM的输出进行审核，输出得分，得分小于0为回答不合格。</p>
          <p><strong>使用方法：</strong></p>
-         <p>在两个输入框中分别输入问题和答案，点击提交，等待1秒左右，查看回答评分结果，回答越优质，得分越高。</p>
+         <p>在四个输入框中分别输入问题、答案、自定义审核规则和词汇列表，点击提交，等待1秒左右，查看回答评分结果，回答越优质，得分越高。</p>
          <p>模型下载链接：https://www.modelscope.cn/models/tcexeexe/shtecCostModel1.5B</p>
          <p><strong>系统处于测试状态，返回结果仅供参考。</strong></p>
      </div>
