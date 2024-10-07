@@ -63,15 +63,17 @@ def call_api(question, answer, custom_rules, word_list):
         
         response_data = response.json()
         score = response_data.get("message", {}).get("score")  # Extracting the 'score' field from the API response
+        answer_judge = response_data.get("message", {}).get("answer_judge")  # Extracting the 'score' field from the API response
+        reference_answer = response_data.get("message", {}).get("reference_answer")  # Extracting the 'score' field from the API response
         if score is not None:
             score = float(score)
             if score < -1:
-                explanation = "回答不合格"
+                explanation = "回答不合格" +  reference_answer
             elif score > 1:
                 explanation = "回答合格"
             else:
                 explanation = "疑似"
-            return score, explanation
+            return answer_judge, score, explanation
 
     except requests.exceptions.RequestException as e:
         return f"请求错误: {str(e)}", ""
@@ -219,7 +221,8 @@ iface = gr.Interface(
         gr.Textbox(lines=2, placeholder="请输入词汇列表，用逗号分隔...", label="词汇列表（可选）", value="")
     ],
     outputs=[
-        gr.Textbox(label="评分"),# , elem_classes="no-border-input"
+        gr.Textbox(label="问题安全性评价"),# , elem_classes="no-border-input"
+        gr.Textbox(label="回答评分"),# , elem_classes="no-border-input"
         gr.Textbox(label="评分解释") # , elem_classes="no-border-input"
     ],
     title="“对齐能手”问答审核模型 试用页面",
