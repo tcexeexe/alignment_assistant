@@ -63,7 +63,7 @@ def call_api(question, answer, custom_rules, word_list):
         
         response_data = response.json()
         score = response_data.get("message", {}).get("score")  # Extracting the 'score' field from the API response
-        answer_judge = response_data.get("message", {}).get("answer_judge")  # Extracting the 'score' field from the API response
+        question_judge = response_data.get("message", {}).get("question_judge")  # Extracting the 'score' field from the API response
         reference_answer = response_data.get("message", {}).get("reference_answer")  # Extracting the 'score' field from the API response
         if score is not None:
             score = float(score)
@@ -73,7 +73,7 @@ def call_api(question, answer, custom_rules, word_list):
                 explanation = "回答合格"
             else:
                 explanation = "疑似"
-            return answer_judge, score, explanation
+            return question_judge, score, explanation
 
     except requests.exceptions.RequestException as e:
         return f"请求错误: {str(e)}", ""
