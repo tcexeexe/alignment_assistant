@@ -68,7 +68,7 @@ def call_api(question, answer, custom_rules, word_list):
         if score is not None:
             score = float(score)
             if score < -1:
-                explanation = "回答不合格" +  reference_answer
+                explanation = "回答不合格 \n参考回答" +  reference_answer
             elif score > 1:
                 explanation = "回答合格"
             else:
